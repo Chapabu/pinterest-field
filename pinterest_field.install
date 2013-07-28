@@ -20,6 +20,11 @@ function pinterest_field_field_schema($field) {
       'type' => 'varchar',
       'length' => 255,
       'not null' => TRUE
+    ),
+    'pinterest_board_name' => array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
     )
   );
 
@@ -30,4 +35,3 @@ function pinterest_field_field_schema($field) {
     )
   );
 }
-

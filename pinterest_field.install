@@ -2,7 +2,11 @@
 
 /**
  * @file pinterest_field.install
- * TODO: Enter file description here.
+ *
+ * Install routines for the Pinterest field.
+ *
+ * Including:
+ *  - Field schema
  */
 
 
@@ -10,42 +14,20 @@
  * Implements hook_field_schema().
  */
 function pinterest_field_field_schema($field) {
-  if ($field['type'] == 'text_long') {
-    $columns = array(
-      'value' => array(
-        'type' => 'text',
-        'size' => 'big',
-        'not null' => FALSE,
-      ),
-    );
-  }
-  else {
-    $columns = array(
-      'value' => array(
-        'type' => 'varchar',
-        'length' => $field['settings']['max_length'],
-        'not null' => FALSE,
-      ),
-    );
-  }
-  $columns += array(
-    'format' => array(
+
+  $columns = array(
+    'pinterest_username' => array(
       'type' => 'varchar',
       'length' => 255,
-      'not null' => FALSE,
-    ),
+      'not null' => TRUE
+    )
   );
+
   return array(
     'columns' => $columns,
     'indexes' => array(
-      'format' => array('format'),
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'table' => 'filter_format',
-        'columns' => array('format' => 'format'),
-      ),
-    ),
+      'pinterest_username' => array('pinterest_username'),
+    )
   );
 }
 

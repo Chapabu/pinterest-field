@@ -1,0 +1,5 @@
+name = Pinterest field
+description = Provide a field to output a user's Pinterest widget
+dependencies[] = field
+package = Fields
+core = 7.x

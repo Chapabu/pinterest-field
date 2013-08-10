@@ -82,7 +82,7 @@ function pinterest_field_field_widget_info() {
 function pinterest_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   $widget = $element;
   $widget['#delta'] = $delta;
-  
+
   switch ($instance['widget']['type']) {
     case 'pinterest_field_board_widget':
       $element += array(
@@ -112,10 +112,12 @@ function pinterest_field_field_widget_form(&$form, &$form_state, $field, $instan
  */
 function pinterest_field_field_formatter_info() {
   return array(
-    'text_default' => array(
+    'pinterest_default' => array(
       'label' => t('Default'),
-      'field types' => array('text', 'text_long', 'text_with_summary'),
-    ),
+      'field types' => array(
+        'pinterest_field'
+      )
+    )
   );
 }
 

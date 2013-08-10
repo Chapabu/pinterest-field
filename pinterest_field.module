@@ -44,6 +44,10 @@ function pinterest_field_field_validate($entity_type, $entity, $field, $instance
  * Implements hook_field_is_empty().
  */
 function pinterest_field_field_is_empty($item, $field) {
+  // Check if the field empty
+  if (empty($item['pinterest_username']) && (string) $item['pinterest_username'] !== '0') {
+    return TRUE;
+  }
   return FALSE;
 }
 
@@ -87,6 +91,7 @@ function pinterest_field_field_widget_form(&$form, &$form_state, $field, $instan
           '#title' => t('Board name'),
           '#description' => t('Enter the board name that you wish to show.'),
           '#default_value' => isset($items[$delta]['pinterest_boardname']) ? $items[$delta]['pinterest_boardname'] : '',
+          '#weight' => 1,
         )
       );
     // This is a DELIBERATE fall-through. The board widget still requires a username, so don't bother duplicating code.
@@ -97,6 +102,7 @@ function pinterest_field_field_widget_form(&$form, &$form_state, $field, $instan
           '#title' => t('Pinterest username'),
           '#description' => t('This is the Pinterest username.'),
           '#default_value' => isset($items[$delta]['pinterest_username']) ? $items[$delta]['pinterest_username'] : '',
+          '#weight' => 0,
         )
       );
       break;

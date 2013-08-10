@@ -82,7 +82,7 @@ function pinterest_field_field_widget_info() {
 function pinterest_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   $widget = $element;
   $widget['#delta'] = $delta;
-  dpm($instance);
+  
   switch ($instance['widget']['type']) {
     case 'pinterest_field_board_widget':
       $element += array(

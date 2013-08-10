@@ -25,7 +25,7 @@ function pinterest_field_field_info() {
     'pinterest_field' => array(
       'label' => t('Pinterest'),
       'description' => t('This field stores a Pinterest username/board ID in the database.'),
-      'settings' => array('max_length' => 255),
+      'settings' => array(),
       'instance_settings' => array(),
       'default_widget' => 'pinterest_field_profile_widget',
       'default_formatter' => 'pinterest_field_profile_formatter',
@@ -83,16 +83,24 @@ function pinterest_field_field_widget_form(&$form, &$form_state, $field, $instan
   $widget = $element;
   $widget['#delta'] = $delta;
   dpm($instance);
-
   switch ($instance['widget']['type']) {
-    case 'pinterest_field_profile_widget':
-    $element =+ array(
-      ''
-    );
-
-    // This is a DELIBERATE fall-through. The board widget still requires a username, so don't bother duplicating code?
     case 'pinterest_field_board_widget':
-
+      $element += array(
+        'pinterest_boardname' => array(
+          '#type' => 'textfield',
+          '#title' => t('Board name'),
+          '#description' => t('Enter the board name that you wish to show.')
+        )
+      );
+    // This is a DELIBERATE fall-through. The board widget still requires a username, so don't bother duplicating code.
+    case 'pinterest_field_profile_widget':
+      $element += array(
+        'pinterest_username' => array(
+          '#type' => 'textfield',
+          '#title' => t('Pinterest username'),
+          '#description' => t('This is the Pinterest username.'),
+        )
+      );
       break;
   }
 
@@ -162,16 +170,8 @@ function pinterest_field_field_formatter_view($entity_type, $entity, $field, $in
  * Implements hook_field_settings_form().
  */
 function pinterest_field_field_settings_form($field, $instance, $has_data) {
-  $settings = $field['settings'];
-  $form['max_length'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Maximum length'),
-    '#default_value' => $settings['max_length'],
-    '#required' => FALSE,
-    '#element_validate' => array('element_validate_integer_positive'),
-    '#description' => t('The maximum length of the field in characters. Leave blank for an unlimited size.'),
-  );
-  return $form;
+  // There are no settings
+  // @ToDo: Remove this before tagging if it's not used
 }
 
 /**

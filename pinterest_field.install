@@ -19,7 +19,7 @@ function pinterest_field_field_schema($field) {
     'pinterest_username' => array(
       'type' => 'varchar',
       'length' => 255,
-      'not null' => TRUE
+      'not null' => FALSE
     ),
     'pinterest_board_name' => array(
       'type' => 'varchar',
